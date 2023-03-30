@@ -1,7 +1,6 @@
 package org.gopas.springbootdemo.data.model;
 
 import javax.persistence.*;
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 @Entity

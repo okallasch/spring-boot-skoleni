@@ -3,7 +3,10 @@ package org.gopas.springbootdemo.data.model;
 import javax.persistence.*;
 import java.io.Serializable;
 import java.time.LocalDate;
+import java.util.Collection;
+import java.util.Collections;
 import java.util.Objects;
+import java.util.Set;
 
 @Entity
 @Table(name = "person")
@@ -32,6 +35,9 @@ public class Person implements Serializable {
     @ManyToOne
     @JoinColumn(name="id_address")
     private Address address;
+
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "idRole")
+    private Set<PersonHasRole> personHasRoleSet;
 
     public Person() {
     }
@@ -114,6 +120,14 @@ public class Person implements Serializable {
         if (o == null || getClass() != o.getClass()) return false;
         Person person = (Person) o;
         return Objects.equals(email, person.email);
+    }
+
+    public Set<PersonHasRole> getPersonHasRoleSet() {
+        return Collections.unmodifiableSet(personHasRoleSet);
+    }
+
+    public void setPersonHasRoleSet(Set<PersonHasRole> personHasRoleSet) {
+        this.personHasRoleSet = personHasRoleSet;
     }
 
     @Override
